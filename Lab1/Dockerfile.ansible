@@ -1,0 +1,10 @@
+FROM ubuntu:latest
+RUN apt update && apt install -y ansible openssh-client
+WORKDIR /root
+COPY update_web.yml /root/update_web.yml
+COPY hosts.ini /root/hosts.ini
+COPY vm /root/.ssh/vm
+COPY ansible.cfg /root/ansible.cfg 
+RUN chmod 600 /root/.ssh/vm
+RUN echo "" >> /root/.ssh/vm
+CMD ["/bin/bash"]

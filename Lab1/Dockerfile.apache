@@ -1,0 +1,12 @@
+FROM ubuntu:latest
+RUN apt update && apt install -y apache2 openssh-server
+RUN mkdir /var/run/sshd
+RUN mkdir -p /root/.ssh 
+RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCld/E8jCOja8H7hrscVl8ty+PtY/EoUX3c+rwayJboAzpxDOAchk77iRrZqBh2IQlo8178UOg9xUH1Pmz5qPU+BLitkQPjpnCTe68ksWWz4Vt6qGP46dwn923otyhA4r0qmNNzu8Handttv5JGcgtYnpPOmtXI+qdQsS5dMx6XOcghytaC8XRU9xGp5DlIIvyhLqiBU+n+f0MHZmKk1Ovu9IeYxFz3SPjqowMyrKHMM8fAByVhkIkYk4Gr+pmrujuPIPUgN6BGndocqSOG0bQ/ELcgx4a01sToyuWMQXBj4pN445bEvtdlCKn6LesCh3BaV82yk2vG+UNR3gihfnlGy+/wrnET2Xbglwg+N6gLwWUa3qiA0Qf8VB7qccERwtfQTLgayUeswjzOHZ2DiI4WW21AsHd+xGZMAxJGjv7ZOACrANybpA3d+cALTizvRH6ZVCnizEKqB2ZIugZA24h5fqjmbSU+BQWe/aasg49U8CfhUchhVRDsLG4CBkDzCrM= jeka@testapache" >> /root/.ssh/authorized_keys \
+    && chmod 600 /root/.ssh/authorized_keys \
+    && chmod 700 /root/.ssh
+EXPOSE 22 80
+CMD service ssh start && apachectl -D FOREGROUND
+
+
+#Line 5 use your public key.
